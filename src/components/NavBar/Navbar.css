@@ -1,0 +1,359 @@
+/* --- Global Styles & Base --- */
+body {
+    font-family: 'Inter', sans-serif; /* A modern, clean font */
+    margin: 0;
+    padding: 0;
+    background-color: #0d0d0d; /* Darker background for contrast */
+    color: #f0f0f0;
+    overflow-x: hidden; /* Prevent horizontal scroll from animations */
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* --- Navbar Enhancements --- */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 8%;
+    backdrop-filter: blur(12px); /* Slightly more blur */
+    background: rgba(18, 18, 18, 0.7); /* Slightly more opaque */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* Softer border */
+    color: #f0f0f0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: background 0.3s ease, padding 0.3s ease; /* Transition for scroll effects */
+}
+
+/* Navbar Shrink on Scroll (requires JS, see below) */
+.navbar.scrolled {
+    padding: 12px 8%;
+    background: rgba(18, 18, 18, 0.9); /* More opaque when scrolled */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Subtle shadow on scroll */
+}
+
+.navbar .logo {
+    width: clamp(120px, 12vw, 180px);
+    filter: drop-shadow(0 0 6px rgba(0, 229, 255, 0.2)); /* Enhanced shadow for logo */
+    transition: transform 0.3s ease; /* Smooth scaling on hover */
+}
+
+.navbar .logo:hover {
+    transform: scale(1.05); /* Slight grow on hover */
+}
+
+.navbar ul {
+    display: flex;
+    gap: 36px; /* Slightly more space */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar li {
+    cursor: pointer;
+    position: relative;
+    font-weight: 500;
+    transition: color 0.3s ease, transform 0.2s ease; /* Add transform for subtle movement */
+}
+
+.navbar li::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px; /* Slightly lower */
+    width: 0%;
+    height: 2px;
+    background-color: #00e5ff;
+    transition: width 0.3s cubic-bezier(0.23, 1, 0.32, 1), background-color 0.3s ease; /* Smoother animation curve */
+    transform-origin: left;
+}
+
+.navbar li:hover {
+    color: #00e5ff;
+    transform: translateY(-2px); /* Subtle lift on hover */
+}
+
+.navbar li:hover::after {
+    width: 100%;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: clamp(10px, 2vw, 20px);
+}
+
+.navbar select {
+    padding: 8px 14px; /* Slightly more padding */
+    border-radius: 8px;
+    border: 1px solid #333; /* Darker border */
+    background: rgba(255, 255, 255, 0.08); /* Slightly more visible background */
+    color: #fff;
+    font-size: 0.9rem;
+    outline: none;
+    appearance: none; /* Remove default arrow */
+    cursor: pointer;
+    transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.navbar select:focus {
+    border-color: #00e5ff;
+    background: rgba(0, 229, 255, 0.1); /* Light glow on focus */
+}
+
+.navbar option {
+    background-color: #1b1b1b;
+    color: white;
+}
+
+.navbar button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 28px; /* Larger button */
+    border-radius: 999px;
+    font-size: 1rem; /* Slightly larger font */
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(135deg, #00e5ff, #006eff);
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(0, 229, 255, 0.4); /* Stronger initial shadow */
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother and more pronounced transitions */
+    overflow: hidden; /* For pseudo-element effects */
+    position: relative;
+}
+
+.navbar button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.15); /* Light ripple effect */
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.4s ease, height 0.4s ease;
+    z-index: 0;
+}
+
+.navbar button:hover::before {
+    width: 200%;
+    height: 200%;
+}
+
+.navbar button:hover {
+    transform: translateY(-4px); /* More pronounced lift */
+    box-shadow: 0 10px 25px rgba(0, 229, 255, 0.6); /* Even stronger shadow on hover */
+}
+
+.navbar button img {
+    width: 16px; /* Slightly larger icon */
+    filter: brightness(0) invert(1);
+}
+
+/* --- Hero Section (Example for animation) --- */
+.hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: calc(100vh - 80px); /* Adjust based on navbar height */
+    padding: 40px 8%;
+    background: radial-gradient(circle at top center, rgba(0, 110, 255, 0.1) 0%, transparent 70%);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section h1 {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    margin-bottom: 20px;
+    background: linear-gradient(45deg, #00e5ff, #006eff, #ff00c3); /* Vibrant gradient text */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    opacity: 0; /* Start hidden for animation */
+    transform: translateY(20px);
+    animation: fadeInSlideUp 1s ease-out forwards;
+    animation-delay: 0.2s;
+}
+
+.hero-section p {
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    max-width: 800px;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    color: #c0c0c0;
+    opacity: 0; /* Start hidden for animation */
+    transform: translateY(20px);
+    animation: fadeInSlideUp 1s ease-out forwards;
+    animation-delay: 0.4s;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    opacity: 0; /* Start hidden for animation */
+    transform: translateY(20px);
+    animation: fadeInSlideUp 1s ease-out forwards;
+    animation-delay: 0.6s;
+}
+
+.hero-button-primary {
+    /* Re-use navbar button styles or create a new one */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 32px;
+    border-radius: 999px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(135deg, #00e5ff, #006eff);
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(0, 229, 255, 0.4);
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.hero-button-primary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 229, 255, 0.6);
+}
+
+.hero-button-secondary {
+    padding: 14px 32px;
+    border-radius: 999px;
+    font-size: 1rem;
+    font-weight: 600;
+    background: transparent;
+    color: #00e5ff;
+    border: 2px solid #00e5ff;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.hero-button-secondary:hover {
+    background: #00e5ff;
+    color: #0d0d0d;
+    transform: translateY(-2px);
+}
+
+/* Background Particle/Blob Animation (Example) */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: rgba(0, 110, 255, 0.15);
+    border-radius: 50%;
+    filter: blur(100px);
+    animation: moveBlob1 15s infinite alternate ease-in-out;
+    z-index: -1;
+    top: 10%;
+    left: 15%;
+}
+
+.hero-section::after {
+    content: '';
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    background: rgba(255, 0, 195, 0.1);
+    border-radius: 50%;
+    filter: blur(100px);
+    animation: moveBlob2 18s infinite alternate-reverse ease-in-out;
+    z-index: -1;
+    bottom: 20%;
+    right: 10%;
+}
+
+/* --- Keyframe Animations --- */
+@keyframes fadeInSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes moveBlob1 {
+    0% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(50px, -70px) scale(1.1); }
+    66% { transform: translate(-30px, 40px) scale(0.9); }
+    100% { transform: translate(0, 0) scale(1); }
+}
+
+@keyframes moveBlob2 {
+    0% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(-40px, 60px) scale(0.95); }
+    66% { transform: translate(70px, -50px) scale(1.05); }
+    100% { transform: translate(0, 0) scale(1); }
+}
+
+/* --- Section Scroll Animations (Example) --- */
+/* Add this class to sections that should animate into view */
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.fade-in-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Media Queries for Responsiveness (Crucial for good design) --- */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 12px 5%;
+    }
+
+    .navbar ul {
+        gap: 20px;
+    }
+
+    .hero-section {
+        padding: 30px 5%;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .navbar ul {
+        width: 100%;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .nav-right {
+        width: 100%;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .navbar button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}
