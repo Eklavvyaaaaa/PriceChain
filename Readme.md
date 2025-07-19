@@ -55,48 +55,6 @@ To get a local copy up and running, follow these simple steps.
     yarn dev
     ```
     This will start the Vite development server, usually at `http://localhost:5173`.
-
-4.  **Open your browser** and navigate to the displayed URL.
-
-PriceChain/
-├── public/
-├── src/
-│   ├── assets/             # Images and other static assets
-│   ├── components/
-│   │   ├── Footer/         # Footer component and styles
-│   │   │   ├── Footer.jsx
-│   │   │   └── Footer.css
-│   │   ├── LineChart/      # Google Line Chart component
-│   │   │   └── LineChart.jsx
-│   │   └── NavBar/         # Navigation bar component and styles
-│   │       ├── Navbar.jsx
-│   │       └── Navbar.css
-│   ├── context/
-│   │   └── CoinContext.jsx # React Context for coin data and currency
-│   ├── pages/
-│   │   ├── Api/            # API/Developers page
-│   │   │   ├── Api.jsx
-│   │   │   └── Api.css
-│   │   ├── Blog/           # Blog page
-│   │   │   ├── Blog.jsx
-│   │   │   └── Blog.css
-│   │   ├── Coin/           # Individual coin detail page
-│   │   │   ├── Coin.jsx
-│   │   │   └── Coin.css
-│   │   └── Home/           # Homepage component and styles
-│   │       ├── Home.jsx
-│   │       └── Home.css
-│   ├── App.jsx             # Main application component and routing
-│   ├── index.css           # Global styles
-│   └── main.jsx            # Entry point of the React application
-├── .gitignore              # Specifies intentionally untracked files
-├── index.html              # Main HTML file
-├── package.json            # Project dependencies and scripts
-├── package-lock.json       # Dependency tree lock file
-├── README.md               # Project README (this file)
-└── vite.config.js          # Vite configuration for base path
-
-
 ## Deployment
 
 This project uses `gh-pages` for deployment to GitHub Pages.
